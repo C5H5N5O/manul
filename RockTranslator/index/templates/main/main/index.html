@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <div>about us</div>
+    </div>
+    <div id="content">
+        <div id="stats">
+            <div id="health">
+                HEALTH
+                <progress id="health_bar" value="{{ health_index }}" max="100"></progress>
+            </div>
+            <div id="hunger">
+                HUNGER
+                <progress id="hunger_bar" value="{{ hunger_index }}" max="100"></progress>
+            </div>
+            <div id="happiness">
+                HAPPINESS
+                <progress id="happiness_bar" value="{{ happiness_index }}" max="100"></progress>
+                <button class="btn btn-primary" id="play">play with me</button>
+            </div>
+        </div>
+        <div id="stone"> 
+            <form action="post" id="talking_form">
+                <input type="text" class="form-control" id="input">
+            </form>
+        </div>
+        <div id="hood">hooder</div>
+        
+    </div>
+    <style>
+
+
+body {
+    background-color:#FFE4E1;
+}
+
+#header {
+    display: flex;
+    flex-direction: row;
+    -ms-flex-item-align: center;
+    border-bottom: 2px solid gray;
+    width: 100%;
+    height: 60px;
+    background-color: rgb(127, 93, 93);
+}
+
+#talking_form {
+    height: 100%;
+}
+
+#input {
+    float:inline-end;
+}
+
+#content {
+    margin-top: 10px;
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+#health_bar {
+    height: 40px;
+}
+#hunger_bar {
+    height: 40px;
+}
+#happiness_bar {
+    height: 40px;
+}
+#stats {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#health {
+    margin-left: 5px;
+    margin-top: 0px;
+}
+#hunger {
+    margin-left: 5px;
+    margin-top: 30px;
+}
+#happiness {
+    margin-left: 5px;
+    margin-top: 30px;
+}
+#stone {
+    flex: 6;
+    margin-left: 10px;
+    border: solid 3px black;
+    height: 500px;
+    width: 100%;
+}
+
+#hood {
+    flex: 1;
+}
+#play {
+    margin-left: 20px;
+}
+    </style>
+
+    <script>
+
+var button = document.getElementById("play")
+button.onclick = () => {
+    document.location.href = "flappy_rock"
+}
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+#image {
+    margin-top: 20px;
+    width: 50%;
+    height: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+#content_field {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 300px;
+    border: 3px solid rgb(19, 17, 17);
+    background-color: floralwhite;    
+    padding: 10px;
+}
+
+#success {
+    margin-top: 100px;
+    visibility: hidden;
+    color: green;
+}
+
+body {
+    background-color: black;
+}

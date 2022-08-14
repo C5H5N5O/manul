@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/stylesheet.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content_field">
+        <h1 id="load">loading</h1>
+        <h1 id="success">Welcome to the rock communication system</h1>
+    </div>
+    
+    <div id="img_conteiner">
+        <img id="image" src="https://media.discordapp.net/attachments/850232189546659870/866366285339820052/a_1daed717448c8bb2648a81fed0f7fb00-1.gif">
+    </div>
+</body>
+<script>
+var element = document.getElementById("load")
+
+
+function ImitateLoading(element, iteration=0) {
+    if (iteration == 4) return;
+
+    console.log(iteration);
+
+    var dots = ""
+    dotsAmount = iteration
+    while (dotsAmount != 0) {
+        dotsAmount--
+        dots += "."
+    }
+
+    element.innerHTML = "loading" + dots
+
+    setTimeout(ImitateLoading, 1000, element, iteration+1)
+}
+
+setTimeout(ImitateLoading, 1000, element)
+setTimeout(() => {document.getElementById("success").style.visibility = "visible"}, 4600)
+setTimeout(() => {document.location.href = "main/"}, 5800)
+</script>
+</html>
