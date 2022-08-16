@@ -11,7 +11,7 @@ def preloader(request):
 
 
 def index(request):
-    
+    #привет
     from . import db_updater_working
 
     if not db_updater_working:
