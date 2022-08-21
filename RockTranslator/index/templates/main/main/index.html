@@ -27,8 +27,10 @@
             </div>
         </div>
         <div id="stone"> 
-            <form action="post" id="talking_form">
+            <form method="post" id="talking_form">
+                {% csrf_token %}
                 <input type="text" class="form-control" id="input">
+                <div id="dialog">Валентин: {{ ansver }}</div>
             </form>
         </div>
         <div id="hood">hooder</div>
@@ -98,7 +100,7 @@ body {
 #stone {
     flex: 6;
     margin-left: 10px;
-    border: solid 3px black;
+    border: solid 3px black; 
     height: 500px;
     width: 100%;
 }
@@ -109,14 +111,20 @@ body {
 #play {
     margin-left: 20px;
 }
+#ansver {
+    visibility: hidden;
+}
     </style>
 
     <script>
+
+
 
 var button = document.getElementById("play")
 button.onclick = () => {
     document.location.href = "flappy_rock"
 }
+
 
     </script>
 </body>

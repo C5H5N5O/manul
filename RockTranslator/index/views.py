@@ -1,9 +1,10 @@
 from concurrent.futures import thread
+from tkinter import dialog
 from django.shortcuts import render
 from django.http import HttpResponse
 
 from index import set_db_worker_started
-from .models import Rock
+from .models import Rock, Massage
 import random, time, threading
 
 def preloader(request):
@@ -11,6 +12,10 @@ def preloader(request):
 
 
 def index(request):
+
+    if request.method == "POST":
+        ansver = "..."
+
     #привет
     from . import db_updater_working
 
@@ -34,11 +39,17 @@ def index(request):
     happiness   = Valentin.happiness_index
     health      = random.randint(87, 92)
 
+
+    dialog = Massage.objects.all()
+    dialog = dialog[len(dialog)-10: len(dialog)]
+    
+
     return render(request, "main/main/index.html",  
     {   
         'hunger_index'   : hunger,
         'happiness_index': happiness, 
-        'health_index'   : health 
+        'health_index'   : health,
+        'dialog'         : dialog
     })
 
 

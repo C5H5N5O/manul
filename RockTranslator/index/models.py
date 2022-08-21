@@ -9,3 +9,7 @@ class Rock(models.Model):
     happiness_index = models.IntegerField(max_length=100)
 
     
+class Massage(models.Model):
+    autor   = models.CharField(max_length=40)
+    context = models.TextField(max_length=2000)
+    
