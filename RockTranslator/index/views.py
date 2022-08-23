@@ -5,6 +5,8 @@ from django.http import HttpResponse
 
 from index import set_db_worker_started
 from .models import Rock, Massage
+from .forms import MassageForm
+
 import random, time, threading
 
 def preloader(request):
@@ -12,11 +14,16 @@ def preloader(request):
 
 
 def index(request):
-
+    
+    error = ""
     if request.method == "POST":
-        ansver = "..."
+        form = MassageForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            error = ".........."
 
-    #привет
+
     from . import db_updater_working
 
     if not db_updater_working:
@@ -38,18 +45,21 @@ def index(request):
     hunger      = Valentin.hunger_index
     happiness   = Valentin.happiness_index
     health      = random.randint(87, 92)
-
-
-    dialog = Massage.objects.all()
-    dialog = dialog[len(dialog)-10: len(dialog)]
     
+    form = MassageForm()
+
+    chat = Massage.objects.all()
+    if len(chat) > 9:
+        chat = chat[len(chat)-9:len(chat)]
 
     return render(request, "main/main/index.html",  
     {   
         'hunger_index'   : hunger,
         'happiness_index': happiness, 
         'health_index'   : health,
-        'dialog'         : dialog
+        'form'           : form,
+        'error'          : error,
+        'chat'           : chat
     })
 
 

@@ -23,14 +23,20 @@
             <div id="happiness">
                 HAPPINESS
                 <progress id="happiness_bar" value="{{ happiness_index }}" max="100"></progress>
-                <button class="btn btn-primary" id="play">play with me</button>
+                <form action="/games"><button class="btn btn-primary" id="play">play with me</button></form>
             </div>
         </div>
         <div id="stone"> 
+            <div id="dialog">
+                {% for msg in chat %}
+                manul: {{ msg.context }} <br>
+                rock: ... <br>
+                {% endfor %}
+            </div>
             <form method="post" id="talking_form">
                 {% csrf_token %}
-                <input type="text" class="form-control" id="input">
-                <div id="dialog">Валентин: {{ ansver }}</div>
+                {{ form.context }}
+                {{error}}    
             </form>
         </div>
         <div id="hood">hooder</div>
@@ -103,6 +109,7 @@ body {
     border: solid 3px black; 
     height: 500px;
     width: 100%;
+    
 }
 
 #hood {
@@ -119,11 +126,6 @@ body {
     <script>
 
 
-
-var button = document.getElementById("play")
-button.onclick = () => {
-    document.location.href = "flappy_rock"
-}
 
 
     </script>
