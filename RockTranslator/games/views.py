@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from index.models import Rock
+from index.models import Rock
 # Create your views here.
 
 def menu(request):
