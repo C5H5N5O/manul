@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 
 from index import set_db_worker_started
-from .models import Rock, User
+from .models import Rock, User, Massage
+from .forms import MassageForm
 import random, time, threading
 
 
@@ -11,6 +12,14 @@ def preloader(request):
 
 
 def index(request):
+
+    error = ""
+    if request.method == "POST":
+        form = MassageForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            error = ".........."
 
     from . import db_updater_working
 
@@ -35,16 +44,23 @@ def index(request):
     happiness = curent_rock.happiness_index
     health    = random.randint(87, 92)
 
+    form = MassageForm()
+
+    chat = Massage.objects.all()
+    if len(chat) > 9:
+        chat = chat[len(chat)-9:len(chat)]
+
     return render(request, "main/main/index.html",
     {   
         'hunger_index'   : hunger,
         'happiness_index': happiness, 
-        'health_index'   : health 
+        'health_index'   : health,
+        'form'           : form,
+        'error'          : error,
+        'chat'           : chat
     })
 
 
 def flappy(request):
- 
     Rock.objects.all()[User.objects.all[0]].update(happiness_index=100)
-
     return render(request, "main/flappy_bird/index.html")
