@@ -1,11 +1,13 @@
+from concurrent.futures import thread
+from tkinter import dialog
 from django.shortcuts import render
-
+from django.http import HttpResponse
 
 from index import set_db_worker_started
-from .models import Rock, User, Massage
+from .models import Rock, Massage, User
 from .forms import MassageForm
-import random, time, threading
 
+import random, time, threading
 
 def preloader(request):
     return render(request, 'main/preloader.html')
@@ -61,6 +63,3 @@ def index(request):
     })
 
 
-def flappy(request):
-    Rock.objects.all()[User.objects.all[0]].update(happiness_index=100)
-    return render(request, "main/flappy_bird/index.html")

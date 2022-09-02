@@ -7,8 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <div>привет</div>
-    <a href="/games/flappy_rock">камень летает
-    </a>
+    <div id="content">
+        <div id="games"><a href="/games/flappy_rock">камень летает</a></div>
+        <div id="box">
+            <form method="POST">
+                {% csrf_token %}
+                <button class="btn btn-primary" id="play">unlock new rock</button>
+            </form>
+        </div>
+    </div>
+        
+    
 </body>
 </html>
