@@ -1,13 +1,14 @@
-from concurrent.futures import thread
-from tkinter import dialog
-from django.shortcuts import render
-from django.http import HttpResponse
+from contextlib import redirect_stdout
+from operator import indexOf
+from zoneinfo import available_timezones
+from django.shortcuts import render, redirect, HttpResponseRedirect
 
 from index import set_db_worker_started
 from .models import Rock, Massage, User
-from .forms import MassageForm
+from .forms import MassageForm, ChoseRockForm
 
 import random, time, threading
+
 
 def preloader(request):
     return render(request, 'main/preloader.html')
@@ -47,10 +48,16 @@ def index(request):
     health    = random.randint(87, 92)
 
     form = MassageForm()
+    chose_form = ChoseRockForm()
 
     chat = Massage.objects.all()
     if len(chat) > 9:
         chat = chat[len(chat)-9:len(chat)]
+
+    
+    
+            
+
 
     return render(request, "main/main/index.html",
     {   
@@ -59,7 +66,17 @@ def index(request):
         'health_index'   : health,
         'form'           : form,
         'error'          : error,
-        'chat'           : chat
-    })
+        'chat'           : chat,
 
+        'choise_form'    : chose_form,
+    })  
+
+
+def change_rock(request):
+    if request.method == "POST":
+        form = ChoseRockForm(request.POST)
+        print(form.data["скин"])
+        User.objects.filter(name="manul").update(curent_rock=form.data["скин"])
+
+    return HttpResponseRedirect('/main/')
 

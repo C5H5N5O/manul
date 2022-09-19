@@ -10,9 +10,9 @@ def menu(request):
         user_get = User.objects.all()[0]
         user_set = User.objects.filter(name="manul")
         print(user_get.exp)
-        if user_get.exp >= 20:
+        if user_get.exp >= 50:
 
-            user_set.update(exp = user_get.exp - 20)
+            user_set.update(exp = user_get.exp - 50)
 
             available_rocks = user_get.available_rocks
             print(available_rocks)
@@ -28,9 +28,11 @@ def menu(request):
             new_available_rocks.append(new_rock)
             
             user_set.update(available_rocks=new_available_rocks)
-        
+
+            return render(request, 'menu/index.html', {"success": "true"})
+
         else:
-            return render(request, 'menu/index.html', {"error": "не хватает опыта"})
+            return render(request, 'menu/index.html', {"success": "false", "xp": user_get.exp})
         
     return render(request, 'menu/index.html')
     

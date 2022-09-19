@@ -40,15 +40,40 @@
             </form>
         </div>
         <div id="hood">hooder</div>
-        
     </div>
-    <style>
+    <div id="chose_rock_cont">
+        <div id="chose_rock">
+
+            
+
+            <form action="/main/change_rock" method="post">
+                {% csrf_token %}
+                {{choise_form.as_p}}
+                <!--<p>
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                {% for scin in available_rocks %}
+                <option selected value="{{scin}}">{{ scin }}</option>
+                {% endfor %}
+                <option selected value="0">выбери скин</option>
+                </select>-->
+            <button class="btn btn-primary">выбрать</button></p> </form>
+        </div>
+    </div>    
+<style>
 
 
 body {
     background-color:#FFE4E1;
 }
 
+#chose_rock_cont {
+    width: 100%;
+    display: flex;
+}
+
+#chose_rock {
+    display: flex;
+}
 #header {
     display: flex;
     flex-direction: row;
@@ -61,6 +86,7 @@ body {
 
 #talking_form {
     height: 100%;
+    
 }
 
 #input {
@@ -69,7 +95,7 @@ body {
 
 #content {
     margin-top: 10px;
-    position: fixed;
+    
     display: flex;
     width: 100%;
     height: 100%;

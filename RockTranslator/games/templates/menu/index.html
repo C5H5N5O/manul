@@ -19,10 +19,38 @@
         
 </body>
 <script>
-    var error = "{{error}}";
+    var success = "{{success}}";
 
-    if (error == "не хватает опыта") {
-        alert(error)
+    if (success == "false") {
+        alert("недостаточно опыта: {{xp}} из 50")
     }
+    else if (success == "true") {
+        alert("вы разблокировали новый скин")
+    }
+    
 </script>
 </html>
+
+<style>
+
+
+#games {
+    display: flex;
+    border: 5px solid black;
+    width: 100%;
+    height: 400px;
+}
+#box {
+    margin-top: 10px;
+    border: 5px solid black;
+    width: 100%;
+    align-items: center;
+    height: 100px;
+}
+
+#play {
+    width: 50%;
+    height: 100px;
+}
+
+</style>
