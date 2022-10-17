@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <div id="header">
@@ -13,15 +14,15 @@
     <div id="content">
         <div id="stats">
             <div id="health">
-                HEALTH
+                HEALTH <br>
                 <progress id="health_bar" value="{{ health_index }}" max="100"></progress>
             </div>
             <div id="hunger">
-                HUNGER
+                HUNGER  <br>
                 <progress id="hunger_bar" value="{{ hunger_index }}" max="100"></progress>
             </div>
             <div id="happiness">
-                HAPPINESS
+                HAPPINESS <br>
                 <progress id="happiness_bar" value="{{ happiness_index }}" max="100"></progress>
                 <form action="/games"><button class="btn btn-primary" id="play">play with me</button></form>
             </div>
@@ -42,37 +43,57 @@
         <div id="hood">hooder</div>
     </div>
     <div id="chose_rock_cont">
-        <div id="chose_rock">
-
-            
-
-            <form action="/main/change_rock" method="post">
-                {% csrf_token %}
-                {{choise_form.as_p}}
-                <!--<p>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                {% for scin in available_rocks %}
-                <option selected value="{{scin}}">{{ scin }}</option>
-                {% endfor %}
-                <option selected value="0">выбери скин</option>
-                </select>-->
-            <button class="btn btn-primary">выбрать</button></p> </form>
-        </div>
+            <div id="chose_rock">
+                <form action="" method="post">
+                    
+                    <select id="rock_chose_select">
+                        {% for el in user.available_rocks %}
+                        <option value="{{el}}">  {{el}} </option>
+                        {% endfor %}
+                    </select>
+                    {% csrf_token %}
+                    <button id="rock_chose_btn" class="btn btn-primary">выбрать</button>
+                    
+                </form>
+            </div>
+            <div id="rock_image">
+                <img id="rock_img" src="\static\img\rocks\{{img}}.png" alt="">
+            </div>
+            <div id="hooder_2">
+                
+            </div>
     </div>    
 <style>
 
+#hooder_2 {
+    flex: 1;
+}
+
+.rock_img
+
+#rock_image {
+    margin-left: 10px;
+    border: 2px solid gray;
+    width: 50%;
+    height: 100%;
+    flex: 6;
+}
 
 body {
-    background-color:#FFE4E1;
+    color: black;
+    
 }
 
 #chose_rock_cont {
     width: 100%;
     display: flex;
+    height: 100px;
 }
 
 #chose_rock {
     display: flex;
+    flex: 1;
+    min-width: 165px;
 }
 #header {
     display: flex;
@@ -133,6 +154,7 @@ body {
     flex: 6;
     margin-left: 10px;
     border: solid 3px black; 
+    
     height: 500px;
     width: 100%;
     
@@ -151,8 +173,29 @@ body {
 
     <script>
 
-
-
+        
+        
+        document.getElementById("rock_chose_btn").onclick = () => {
+        {
+            var choice = document.getElementById("rock_chose_select").options[document.getElementById("rock_chose_select").selectedIndex]
+            console.log(choice.value)
+            $.ajax({
+                type: "POST",
+                url: '/main/change_rock/',
+                data: {
+                    curent_skin: choice.value,
+                },
+                success: function (data) {
+                        // any process in data
+                        
+                },
+                failure: function () {
+                        
+                }
+            })
+        }
+    }
+        
 
     </script>
 </body>

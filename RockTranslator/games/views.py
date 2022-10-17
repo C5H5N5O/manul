@@ -41,6 +41,9 @@ def menu(request):
 def flappy(request):
     return render(request, "flappy_bird/index.html")
 
+def road(request):
+    return render(request, "road/game.html")
+
 
 @csrf_exempt
 def AddXP(request):
@@ -49,7 +52,7 @@ def AddXP(request):
         print("sdfsd")
         score = int(request.POST.get("score"))
         print(score)
-        Rock.objects.filter(name=Rock.objects.all()[User.objects.all()[0].curent_rock]).update(happiness_index=score if score < 100 else 100)
+        Rock.objects.filter(name=Rock.objects.all()[User.objects.all()[0].curent_rock]).update(happiness_index=100)
         User.objects.filter(name="manul").update(exp=User.objects.all()[0].exp + score)
 
     return HttpResponseRedirect('/games/')

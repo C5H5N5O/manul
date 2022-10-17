@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.menu),
     path('flappy_rock', views.flappy),
-    path('add_xp', views.AddXP)
+    path('add_xp', views.AddXP),
+    path('road', views.road)
 ]

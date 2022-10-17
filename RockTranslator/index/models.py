@@ -12,7 +12,8 @@ class Rock(models.Model):
     health_index    = models.IntegerField()
     happiness_index = models.IntegerField()
 
-    image = models.ImageField(default="https://cdn.discordapp.com/attachments/432562983776944150/1009574236261720074/3.png", upload_to="rocks/")
+    #image = models.ImageField(default="https://cdn.discordapp.com/attachments/432562983776944150/1009574236261720074/3.png", upload_to="rocks/")
+    scin = models.IntegerField(default=0)
 
 
 class Massage(models.Model):
@@ -28,3 +29,5 @@ class User(models.Model):
     available_rocks = ArrayField(models.IntegerField())
 
     exp = models.IntegerField(default=10)
+
+

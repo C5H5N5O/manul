@@ -23,20 +23,21 @@ class MassageForm(ModelForm):
 
 class ChoseRockForm(forms.Form):
 
-    available_rocks = [rock for rock in User.objects.all()[0].available_rocks]
-    scins = []
-    for _ in range(len(available_rocks)):
-        scins.append(min(available_rocks))
-        available_rocks.pop(available_rocks.index(min(available_rocks)))
 
-    
-    ch = []
-    for i, j in enumerate(scins):
-        ch.append((i, j))
+    def get_available_rocks():
+        available_rocks = [rock for rock in User.objects.all()[0].available_rocks]
 
-    change = (i for i in ch)
+
+        scins = []
+        for _ in range(len(available_rocks)):
+            scins.append(min(available_rocks))
+            available_rocks.pop(available_rocks.index(min(available_rocks)))
+        
+        print(scins)
+
+        return ((i, j) for i, j in enumerate(scins))
 
     
     скин = forms.ChoiceField (
-        choices=change
+        choices=get_available_rocks()
     )

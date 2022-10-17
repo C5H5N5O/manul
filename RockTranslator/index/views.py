@@ -8,7 +8,7 @@ from .models import Rock, Massage, User
 from .forms import MassageForm, ChoseRockForm
 
 import random, time, threading
-
+from django.views.decorators.csrf import csrf_exempt
 
 def preloader(request):
     return render(request, 'main/preloader.html')
@@ -46,6 +46,7 @@ def index(request):
     hunger    = curent_rock.hunger_index
     happiness = curent_rock.happiness_index
     health    = random.randint(87, 92)
+    img       = curent_rock.scin
 
     form = MassageForm()
     chose_form = ChoseRockForm()
@@ -53,10 +54,6 @@ def index(request):
     chat = Massage.objects.all()
     if len(chat) > 9:
         chat = chat[len(chat)-9:len(chat)]
-
-    
-    
-            
 
 
     return render(request, "main/main/index.html",
@@ -67,16 +64,28 @@ def index(request):
         'form'           : form,
         'error'          : error,
         'chat'           : chat,
-
+        'img'            : img,
         'choise_form'    : chose_form,
+        'user'           : user
     })  
 
-
+@csrf_exempt
 def change_rock(request):
     if request.method == "POST":
-        form = ChoseRockForm(request.POST)
-        print(form.data["скин"])
-        User.objects.filter(name="manul").update(curent_rock=form.data["скин"])
+        scin = request.POST.get("curent_skin")
+        print(scin)
+        rocks_images = [
+            "https://cdn.discordapp.com/attachments/432562983776944150/1009577884828045352/11.png",
+            "https://cdn.discordapp.com/attachments/432562983776944150/1009577883666227240/14.png",
+            "https://cdn.discordapp.com/attachments/432562983776944150/1009574239893995571/1.png",
+            "https://cdn.discordapp.com/attachments/432562983776944150/1009574238681841664/9.png",
+            "https://cdn.discordapp.com/attachments/432562983776944150/1009574236261720074/3.png",
+            "https://cdn.discordapp.com/attachments/432562983776944150/1009574236815376394/5.png",
+            "https://cdn.discordapp.com/attachments/432562983776944150/1009574238082048090/8.png",
+            "https://cdn.discordapp.com/attachments/432562983776944150/1009574239310991390/4.png",
+            "https://cdn.discordapp.com/attachments/432562983776944150/1009574239893995571/1.png"
+        ]
+        Rock.objects.filter(name="Valentin").update(scin=int(scin))
 
     return HttpResponseRedirect('/main/')
 
